@@ -12,7 +12,7 @@ class llNode{
 
 class LinkedList{
     private:
-        llNode* head = NULL;
+        llNode* head;
     
     public:
         LinkedList() : head(NULL) {}
@@ -76,7 +76,7 @@ class LinkedList{
                 head = curr;
             
             else{
-                prev->next = curr->next;
+                prev->next = prev->next->next;
                 curr->next = NULL;
             }
 
@@ -96,7 +96,7 @@ class LinkedList{
                 curr = curr->next;
             }
 
-            cout << "\nLength:" << length << '\n' << endl;
+            cout << "\nLength:"  << length << '\n' << endl;
         }
 };
 
