@@ -3,3 +3,7 @@
 ## 1) Array as a linked list
 
 ## 2) Stack as a linked list
+
+## 3) Queue as a linked list
+
+## 4) Binary min-heap as an array
