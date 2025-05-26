@@ -155,7 +155,7 @@ int main(){
         3) Pop
         4) IsEmpty
         5) Print length and elements of Stack
-        5) Exit
+        6) Exit
 
     */
     while(!stop){
