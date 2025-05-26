@@ -11,42 +11,42 @@ class Node{
         Node(int value) : val(value) , next(NULL) {}
 };
 
-class Stack{
+class Queue{
     private:
-        Node* stack_ptr;
         Node* head;
     public:
-        Stack() : head(NULL), stack_ptr (NULL) {}
+        Queue() : head(NULL) {}
 
-        void push(int val){
+        void enqueue(int val){
             Node* newnode = new Node(val);
 
-            if(stack_ptr != NULL)
-                stack_ptr->next = newnode;
-            
-            else
+            Node* curr = head;
+
+            if(curr == NULL)
                 head = newnode;
-            
-            stack_ptr = newnode;
-            
-        }
 
-        void pop(){
-            if(head == stack_ptr)
-                head = stack_ptr = NULL;
-            
             else{
-                Node* curr = head;
-
-                while(curr->next != stack_ptr){
+                while(curr->next != NULL){
                     curr = curr->next;
                 }
 
-                stack_ptr = curr;
-                stack_ptr->next = NULL;
+                curr->next = newnode;
+            }
+            cout << "\n Enqueued element " << val << "\n"<<endl;
+            
+        }
+
+        void dequeue(){
+            if(head->next == NULL)
+                head = NULL;
+            
+            else{
+                Node* aft_head = head->next;
+                head->next = aft_head->next;
+                aft_head->next = NULL;
             }
 
-            cout << "\n Stack's top is popped \n" << endl;
+            cout << "\n Dequeued \n" << endl;
         }
 
         void isEmpty(){
@@ -59,35 +59,31 @@ class Stack{
 
         void print_info(){
             int length = 0;
-            string op= "";
-            string temp;
 
             Node* curr = head;
-            while(curr != NULL){
+            cout << "Queue: " << ends;
 
-                temp = to_string(curr->val);
-                op = temp + ", " + op;
-                
+            while(curr != NULL){
+                cout << curr->val << ", " << ends;
                 length++;
                 
                 curr = curr->next;
             }
 
-            cout << "Stack: " << op << '\n'<< ends;
-            cout << "\nLength: " << length << '\n' << endl;
+            cout << "\nLength:"  << length << '\n' << endl;
         }
 
 };
 
-Stack* s = NULL;
+Queue* q = NULL;
 
 void print_menu(){
     cout<< "\n\n\t------ Menu------"<<endl;
-    cout<<"\t(1) Create empty Stack"<<endl;
-    cout<<"\t(2) Push"<<endl;
-    cout<<"\t(3) Pop"<<endl;
+    cout<<"\t(1) Create empty Queue"<<endl;
+    cout<<"\t(2) Enqueue"<<endl;
+    cout<<"\t(3) Dequeue"<<endl;
     cout<<"\t(4) IsEmpty"<<endl;
-    cout<<"\t(5) Print length and elements of stack"<<endl;
+    cout<<"\t(5) Print length and elements of Queue"<<endl;
     cout<<"\t(6) Exit\n\n"<<endl;
 }
 
@@ -96,47 +92,46 @@ void get_and_do(){
 
     if(op == 1){
 
-        s = new Stack;
+        q = new Queue;
 
-        cout<< "\n Empty Stack created \n" <<endl;
+        cout<< "\n Empty Queue created \n" <<endl;
     }
 
     else if(op == 2){
-        if(s == NULL)
-            cout << "\n Create Stack first using (1)" << endl;
+        if(q == NULL)
+            cout << "\n Create queue first using (1)" << endl;
         
         else{
             cout << "\n Enter the element to be pushed: " << ends;
             int val; cin >> val;
 
-            s->push(val);
+            q->enqueue(val);
         }
     }
 
     else if(op == 3){
-        if(s == NULL)
-            cout << "\n Create Stack first using (1)" << endl;
+        if(q == NULL)
+            cout << "\n Create queue first using (1)" << endl;
         
         else{
 
-            s->pop();
+            q->dequeue();
         }
     }
 
     else if(op == 4){
-        if(s == NULL)
-            cout << "\n Create Stack first using (1)" << endl;
-
-        else    
-            s->isEmpty();
+        if(q == NULL)
+            cout << "\n Create queue first using (1)" << endl;
+        else
+            q->isEmpty();
         
     }
 
     else if(op == 5){
-        if(s == NULL)
+        if(q == NULL)
             cout << "\n Create queue first using (1)" << endl;
         else
-            s->print_info();
+            q->print_info();
     }
 
     else if(op == 6){
@@ -150,12 +145,12 @@ void get_and_do(){
 int main(){
     /*
         Menu - driven program
-        1) Create Empty Stack
-        2) Push
-        3) Pop
+        1) Create Empty Queue
+        2) Enqueue
+        3) Dequeue
         4) IsEmpty
-        5) Print length and elements of Stack
-        5) Exit
+        5) Print length and elements of queue
+        6) Exit
 
     */
     while(!stop){
