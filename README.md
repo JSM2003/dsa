@@ -7,3 +7,12 @@
 ## 3) Queue as a linked list
 
 ## 4) Binary min-heap as an array
+
+
+# Some Sorting Algorithms:
+
+## 1) Insertion sort
+
+## 2) Bubble Sort
+
+## 3) Merge Sort
