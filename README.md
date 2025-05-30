@@ -8,6 +8,7 @@
 
 ## 4) Binary min-heap as an array
 
+## 5) Binary max-heap as an array
 
 # Some Sorting Algorithms:
 
