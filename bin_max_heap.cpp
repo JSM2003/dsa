@@ -5,18 +5,18 @@ using namespace std;
 vector<int> heap;
 bool stop = false;
 
-class MinHeap{
+class MaxHeap{
     private:
-        int* min_ptr;
+        int* max_ptr;
     
     public:
-        MinHeap() : min_ptr(NULL) {}
+        MaxHeap() : max_ptr(NULL) {}
 
         void insert(int value){
 
             heap.push_back(value);
-            if(min_ptr == NULL)
-                min_ptr = &heap[0];
+            if(max_ptr == NULL)
+                max_ptr = &heap[0];
             
             else{
                 bool fixed = false;
@@ -27,7 +27,7 @@ class MinHeap{
                 while(!fixed){
                     parent_idx = (curr_idx % 2) ? (curr_idx / 2 ) : (curr_idx / 2 - 1);
 
-                    if(heap[parent_idx] > heap[curr_idx]){
+                    if(heap[parent_idx] < heap[curr_idx]){
                         temp = heap[curr_idx];
                         heap[curr_idx] = heap[parent_idx];
                         heap[parent_idx] = temp;
@@ -37,7 +37,7 @@ class MinHeap{
                         fixed = true;
 
                     curr_idx = parent_idx;
-                    
+
                     if(curr_idx == 0)
                         break;
 
@@ -47,23 +47,23 @@ class MinHeap{
             cout << "\n Inserted element " << value << "\n" << endl;
         }
 
-        void print_min(){
-            if(min_ptr == NULL){
+        void print_max(){
+            if(max_ptr == NULL){
                 cout << "\n Heap is empty \n" << endl;
             }
 
             else{
-                cout << "\n Min: " << *min_ptr << "\n" << endl;
+                cout << "\n Max: " << *max_ptr << "\n" << endl;
             }
         }
 
-        void delete_min(){
+        void delete_max(){
             if(heap.size() == 0)
                 cout << "\n Heap is empty \n" << endl;
 
             else if(heap.size() == 1){
                 heap.pop_back();
-                min_ptr = NULL;
+                max_ptr = NULL;
             }
             
             else{
@@ -81,8 +81,8 @@ class MinHeap{
                         break;
 
                     else{
-                        child_idx = heap[2*curr_idx+1] < heap[2*curr_idx+2] ? (2*curr_idx+1) : (2*curr_idx+2);
-                        child_idx = heap[curr_idx] > heap[child_idx] ? child_idx : curr_idx;
+                        child_idx = heap[2*curr_idx+1] > heap[2*curr_idx+2] ? (2*curr_idx+1) : (2*curr_idx+2);
+                        child_idx = heap[curr_idx] < heap[child_idx] ? child_idx : curr_idx;
 
                         if(curr_idx == child_idx)
                             break;
@@ -132,14 +132,14 @@ class MinHeap{
         }
 };
 
-MinHeap* h = NULL;
+MaxHeap* h = NULL;
 
 void print_menu(){
     cout<< "\n\n\t------ Menu------"<<endl;
-    cout<<"\t(1) Create empty Min Heap"<<endl;
+    cout<<"\t(1) Create empty Max Heap"<<endl;
     cout<<"\t(2) Insert element"<<endl;
-    cout<<"\t(3) Print min"<<endl;
-    cout<<"\t(4) Delete min"<<endl;
+    cout<<"\t(3) Print max"<<endl;
+    cout<<"\t(4) Delete max"<<endl;
     cout<<"\t(5) Print Heap"<<endl;
     cout<<"\t(6) Exit\n\n"<<endl;
 }
@@ -149,13 +149,13 @@ void get_and_do(){
 
     if(op == 1){
         heap.clear();
-        h = new MinHeap();
+        h = new MaxHeap();
         cout << "\n Created empty Heap \n" << endl;
     }
 
     else if(op == 2){
         if(h == NULL)
-            cout << "\n Create MinHeap first using (1)" << endl;
+            cout << "\n Create MaxHeap first using (1)" << endl;
         
         else{
             cout << "\nEnter element to be inserted: " << ends;
@@ -167,25 +167,25 @@ void get_and_do(){
 
     else if(op == 3){
         if(h == NULL)
-            cout << "\n Create MinHeap first using (1)" << endl;
+            cout << "\n Create MaxHeap first using (1)" << endl;
         
         else{
-            h->print_min();
+            h->print_max();
         }
     }
 
     else if(op == 4){
         if(h == NULL)
-            cout << "\n Create MinHeap first using (1)" << endl;
+            cout << "\n Create MaxHeap first using (1)" << endl;
         
         else{
-            h->delete_min();
+            h->delete_max();
         }
     }
 
     else if(op == 5){
         if(h == NULL)
-            cout << "\n Create MinHeap first using (1)" << endl;
+            cout << "\n Create MaxHeap first using (1)" << endl;
         
         else{
             h->print_heap();
@@ -205,10 +205,10 @@ int main(){
 
     /*
         Menu - driven program
-        1) Create empty Min heap
+        1) Create empty Max heap
         2) insert element
-        3) Print min
-        4) Delete min
+        3) Print max
+        4) Delete max
         5) Print heap
         6) Exit
     */
