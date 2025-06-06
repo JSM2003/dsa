@@ -10,6 +10,8 @@
 
 ## 5) Binary max-heap as an array
 
+## 6) Graph as an adjacency list
+
 # Some Sorting Algorithms:
 
 ## 1) Insertion sort
